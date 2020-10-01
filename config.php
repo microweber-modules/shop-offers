@@ -18,7 +18,9 @@ $config['ui_admin'] = true;
 $config['categories'] = "online shop";
 $config['version'] = 1.0;
 $config['position'] = 27;
-$config['service_provider'] = \MicroweberPackages\Shop\Offers\ShopOffersServiceProvider::class;
+$config['service_provider'] = [
+    \MicroweberPackages\Shop\Offers\ShopOffersServiceProvider::class,
+];
 
 $config['tables'] = array(
 	'offers' => array(
