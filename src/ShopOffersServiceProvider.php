@@ -16,6 +16,6 @@ class ShopOffersServiceProvider extends ServiceProvider
 {
     public function boot()
     {
-        Product::observe(ShopOffersObserver::class);
+
     }
 }

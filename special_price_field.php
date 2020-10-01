@@ -6,8 +6,11 @@ if (!isset($params['product_id'])) {
 }
 
 $productId = $params['product_id'];
-$product = \MicroweberPackages\Product\Product::find($productId);
+$offer = offers_get_by_product_id($productId);
 
+if (!isset($offer['price']['offer_price'])) {
+    $offer['price']['offer_price'] = 0;
+}
 ?>
 <script>
     $(document).ready(function () {
@@ -27,9 +30,9 @@ $product = \MicroweberPackages\Product\Product::find($productId);
 	<label>Special Price</label>
 	<div class="input-group mb-3 prepend-transparent append-transparent">
 		<div class="input-group-prepend">
-			<span class="input-group-text text-muted">BGN</span>
+			<span class="input-group-text text-muted"><?php echo get_currency_code(); ?></span>
 		</div>
-		<input type="text" class="form-control js-product-special-price" name="special_price" value="">
+		<input type="text" class="form-control js-product-special-price" name="special_price" value="<?php echo $offer['price']['offer_price'];?>">
 		<div class="input-group-append">
 			<span class="input-group-text" data-toggle="tooltip" title="" data-original-title="To put a product on sale, make Compare at price the original price and enter the lower amount into Price."><i class="mdi mdi-help-circle"></i></span>
 		</div>

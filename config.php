@@ -20,6 +20,7 @@ $config['version'] = 1.0;
 $config['position'] = 27;
 $config['service_provider'] = [
     \MicroweberPackages\Shop\Offers\ShopOffersServiceProvider::class,
+    \MicroweberPackages\Shop\Offers\ShopOffersEventServiceProvider::class,
 ];
 
 $config['tables'] = array(

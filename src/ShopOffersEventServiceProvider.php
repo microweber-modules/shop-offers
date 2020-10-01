@@ -11,9 +11,11 @@ namespace MicroweberPackages\Shop\Offers;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider;
 use MicroweberPackages\Product\Events\ProductWasCreated;
 use MicroweberPackages\Product\Events\ProductWasUpdated;
+use MicroweberPackages\Shop\Offers\Listeners\AddSpecialPriceProductListener;
+use MicroweberPackages\Shop\Offers\Listeners\EditSpecialPriceProductListener;
 
 
-class ShopOffersServiceProvider extends EventServiceProvider
+class ShopOffersEventServiceProvider extends EventServiceProvider
 {
     protected $listen = [
         ProductWasCreated::class => [

@@ -1,15 +1,7 @@
 <?php
 namespace MicroweberPackages\Shop\Offers\Listeners;
 
-
-class EditCustomFieldProductListener
+class EditSpecialPriceProductListener
 {
-    public function handle($event)
-    {
-        $request = $event->getRequest();
-        $product = $event->getModel();
-
-
-
-    }
+    use ModifySpecialPriceProductTrait;
 }
