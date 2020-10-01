@@ -33,10 +33,7 @@ trait ModifySpecialPriceProductTrait {
             }
             $saveOffer['is_active'] = 'on';
             $saveOffer['product_id_with_price_id'] = $productId . '|'.$priceId;
-            $saveOffer['offer_price'] = $request['special_price'];
-
-            $oneYearTime = strtotime('+1 years', time());
-            $saveOffer['expires_at'] = date('m/d/Y h:i a', $oneYearTime);
+            $saveOffer['offer_price'] = $request['special_price']; 
 
             $save = offer_save($saveOffer);
 

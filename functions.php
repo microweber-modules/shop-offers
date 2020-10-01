@@ -171,7 +171,7 @@ function offers_get_by_product_id($product_id)
     $cache_key = __FUNCTION__.$product_id;
     $ttl = now()->addHour(1);
 
-    $query = DB::table($table)->select('custom_fields.id as id', 'offers.offer_price', 'offers.expires_at', 'custom_fields.name as price_name', 'custom_fields_values.value as price')
+    $query = DB::table($table)->select('custom_fields.id as id','offers.id as offer_id', 'offers.offer_price', 'offers.expires_at', 'custom_fields.name as price_name', 'custom_fields_values.value as price')
         ->leftJoin('content', 'offers.product_id', '=', 'content.id')
         //   ->leftJoin('custom_fields', 'offers.price_key', '=', 'custom_fields.name_key')
         ->leftJoin('custom_fields', 'offers.price_id', '=', 'custom_fields.id')
