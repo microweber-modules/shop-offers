@@ -16,6 +16,10 @@ class ShopOffersObserver
 
     public function saved(Product $product)
     {
+        if (!isset($product->priceModel->id)) {
+            return;
+        }
+
         if (isset($product->additionalData['special_price'])) {
 
             $productId = $product->id;
