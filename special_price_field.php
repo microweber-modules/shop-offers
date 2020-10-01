@@ -32,7 +32,7 @@ if (!isset($offer['price']['offer_price'])) {
         editModal = mw.tools.open_module_modal('shop/offers/edit_offer', data, {overlay: true, skin: 'simple', title: mTitle})
     }
 </script>
-<script>mw.lib.require('mwui_init');</script>
+
 
 <div class="form-group">
 	<label><?php _e('Offer Price'); ?></label>
@@ -47,7 +47,7 @@ if (!isset($offer['price']['offer_price'])) {
                 <span class="input-group-text cursor-pointer" onclick="openOfferEdit('<?php echo $offer['price']['offer_id']; ?>');" data-toggle="tooltip" title="Settings"><i class="mdi mdi-cog text-muted mdi-20px"></i></span>
             </div>
         <?php else: ?>
-            <div class="input-group-append" data-toggle="tooltip" data-title="To put a product on sale, make Compare at price the original price and enter the lower amount into Price.">
+            <div class="input-group-append" data-toggle="tooltip" data-original-title="To put a product on sale, make Compare at price the original price and enter the lower amount into Price.">
                 <span class="input-group-text"><i class="mdi mdi-help-circle"></i></span>
             </div>
         <?php endif; ?>
