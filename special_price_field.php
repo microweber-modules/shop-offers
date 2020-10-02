@@ -13,6 +13,7 @@ if (!isset($offer['price']['offer_price'])) {
 }
 ?>
 <script>
+
     $(document).ready(function () {
         var specialPriceElement = $('.js-product-special-price');
         $(specialPriceElement).on('input', function () {
@@ -44,7 +45,8 @@ if (!isset($offer['price']['offer_price'])) {
 
         <?php if (isset($offer['price']['offer_id'])): ?>
             <div class="input-group-append">
-                <span class="input-group-text cursor-pointer" onclick="openOfferEdit('<?php echo $offer['price']['offer_id']; ?>');" data-toggle="tooltip" title="Settings"><i class="mdi mdi-cog text-muted mdi-20px"></i></span>
+                <span class="input-group-text cursor-pointer" onclick="openOfferEdit('<?php echo $offer['price']['offer_id']; ?>');" data-toggle="tooltip" title="Settings">
+                    <i class="mdi mdi-offer text-muted mdi-20px"></i></span>
             </div>
         <?php else: ?>
             <div class="input-group-append" data-toggle="tooltip" data-original-title="To put a product on sale, make Compare at price the original price and enter the lower amount into Price.">
