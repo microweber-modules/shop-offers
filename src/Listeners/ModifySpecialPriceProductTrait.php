@@ -13,14 +13,14 @@ trait ModifySpecialPriceProductTrait {
 
     public function handle($event)
     {
-        $request = $event->getRequest();
+        $data = $event->getData();
         $product = $event->getModel();
 
         if (!isset($product->priceModel->id)) {
             return;
         }
 
-        if (isset($request['special_price'])) {
+        if (isset($data['special_price'])) {
 
             $productId = $product->id;
             $priceId = $product->priceModel->id;
@@ -33,7 +33,7 @@ trait ModifySpecialPriceProductTrait {
             }
             $saveOffer['is_active'] = 'on';
             $saveOffer['product_id_with_price_id'] = $productId . '|'.$priceId;
-            $saveOffer['offer_price'] = $request['special_price']; 
+            $saveOffer['offer_price'] = $data['special_price'];
 
             $save = offer_save($saveOffer);
 
