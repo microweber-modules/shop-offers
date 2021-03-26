@@ -2,9 +2,13 @@
   "name": "microweber-modules/shop-offers",
   "description": "Shop Offers",
   "license": "MIT",
-  "version": "0.5",
+  "version": "0.6",
   "homepage": "https://github.com/microweber-modules/shop-offers",
   "authors": [
+     {
+      "name": "Nick Woolley",
+      "email": "nick@ezyweb.uk"
+    },
     {
       "name": "Bozhidar Slaveykov",
       "email": "bobi@microweber.com"
