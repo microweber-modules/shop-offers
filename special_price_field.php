@@ -1,26 +1,34 @@
 <?php must_have_access(); ?>
 
 <?php
-if (!isset($params['product_id'])) {
+if (!isset($params['product_id']) or !class_exists('\MicroweberPackages\Offer\Models\Offer')) {
     return;
 }
 
 $productId = $params['product_id'];
-$offer = offers_get_by_product_id($productId);
+//WAS $offer = offers_get_by_product_id($productId);
+$offer = \MicroweberPackages\Offer\Models\Offer::getByProductId($productId);
 
 if (!isset($offer['price']['offer_price'])) {
-    $offer['price']['offer_price'] = 0;
+    $offer['price']['offer_price'] = '';
 }
 ?>
 <script>
 
     $(document).ready(function () {
         var specialPriceElement = $('.js-product-special-price');
+        var specialPriceSet = "<?php echo !empty($offer['price']['offer_price']) ? 1 : 0?>";
+
+        if(specialPriceSet == 1) {
+            $('#customCheck322').attr('checked','checked');
+            $('.js-offer-price-form-group').show();
+        }
+
         $(specialPriceElement).on('input', function () {
             mw.on.stopWriting(this, function () {
-               if (parseFloat($('.js-product-price').val()) === parseFloat($(this).val())) {
-                    mw.notification.warning('<?php _e('Special price must be different from the original price!'); ?>');
-               }
+                var textPrice = $(specialPriceElement).val();
+                var formatPrice = textPrice.replace(",", "");
+                $(specialPriceElement).val(formatPrice);
             });
         });
 
@@ -32,16 +40,34 @@ if (!isset($offer['price']['offer_price'])) {
         data.offer_id = offer_id;
         editModal = mw.tools.open_module_modal('shop/offers/edit_offer', data, {overlay: true, skin: 'simple', title: mTitle})
     }
+    
+    function toggleOfferPrice() {
+        // var specialOfferCheckEl = $('#customCheck322');
+        // if(!specialOfferCheckEl.is(':checked')) {
+        //     $('.js-product-special-price').val(null);
+        // }
+        $('.js-offer-price-form-group').toggle();
+    }
 </script>
 
+<div class="col-md-12">
 
 <div class="form-group">
+    <div class="custom-control custom-checkbox">
+        <input autocomplete="off" type="checkbox" name="content_data[has_special_price]" class="custom-control-input"  id="customCheck322" onchange="toggleOfferPrice()" value="1"  />
+        <label class="custom-control-label" for="customCheck322"><?php _e('Make offer price for product'); ?></label>
+    </div>
+</div>
+
+
+<div class="form-group js-offer-price-form-group" style="display: none">
 	<label><?php _e('Offer Price'); ?></label>
 	<div class="input-group mb-3 prepend-transparent append-transparent">
 		<div class="input-group-prepend">
 			<span class="input-group-text text-muted"><?php echo get_currency_code(); ?></span>
 		</div>
-		<input type="text" class="form-control js-product-special-price" name="special_price" value="<?php echo $offer['price']['offer_price'];?>">
+        
+		<input autocomplete="off" type="text" class="form-control js-product-special-price" name="content_data[special_price]" value="<?php echo $offer['price']['offer_price'];?>">
 
         <?php if (isset($offer['price']['offer_id'])): ?>
             <div class="input-group-append">
@@ -55,4 +81,11 @@ if (!isset($offer['price']['offer_price'])) {
         <?php endif; ?>
 
 	</div>
+    <?php if(isset($offer['price']['expires_at']) && $offer['price']['expires_at'] > 0): ?>
+        <div class="text-muted">
+            <?php _e('Expires at'); ?>    <?php echo $offer['price']['expires_at']; ?>
+        </div>
+    <?php endif; ?>
+</div>
+
 </div>
