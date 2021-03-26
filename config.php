@@ -16,7 +16,7 @@ $config['author'] = "Nick Woolley";
 $config['ui'] = false;
 $config['ui_admin'] = true;
 $config['categories'] = "online shop";
-$config['version'] = 1.0;
+$config['version'] = 0.7;
 $config['position'] = 27;
 $config['settings']['service_provider'] = [
     \MicroweberPackages\Shop\Offers\ShopOffersServiceProvider::class,
